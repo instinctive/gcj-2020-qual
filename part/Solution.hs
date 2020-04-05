@@ -38,10 +38,10 @@ docase = do
     putStrLn (solve tasks)
 
 solve :: [[Int]] -> String
-solve raw = go [] 0 0 cooked where
-    rawmap = M.fromList (zip raw [0..])
+solve tasks = go [] 0 0 (fst <$> cooked) where
+    raw = zip tasks [0..]
     cooked = sort raw
-    ordering = (rawmap M.!) <$> cooked
+    ordering = snd <$> cooked
 
     go a _ _ [] = snd <$> sort (zip ordering $ reverse a)
     go a c j ([s,e]:xx)
